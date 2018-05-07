@@ -30,7 +30,7 @@ new WebpackDevServer(webpack(config), {
     ignored: /node_modules/,
   },
   proxy: {
-    '/api/v1/*': {
+    '/api/*': {
       target: api,
       secure: false,
       changeOrigin: true

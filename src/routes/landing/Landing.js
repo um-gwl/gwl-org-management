@@ -47,12 +47,13 @@ class Landing extends Component {
 
     return (
       <div>
-          <Header/>
-          <Switch>
-            <Route exact path ="/login" component={Login}/>
-            <Route exact path="/" component={LandingBody} />
-            <Route path="*" component={NotFound} />
-          </Switch>
+        <Header/>
+        <Switch>
+          <Route exact path ="/login" component={Login}/>
+          <Route exact path="/" component={LandingBody} />
+          <Redirect from="/employee/*" to="/login" />
+          <Route path="/*" component={NotFound} />
+        </Switch>
         <Footer/>
       </div>
     );

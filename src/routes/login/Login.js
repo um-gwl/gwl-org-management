@@ -1,7 +1,7 @@
 import propTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {logIn} from './Login.action';
+import {googlelogInApi} from '../../actions/Login.action';
 import {GoogleLogin} from 'react-google-login';
 import './login.css';
 
@@ -13,11 +13,18 @@ class Login extends Component {
       email: response.profileObj.email,
       name: response.profileObj.name,
     };
-    this.props.dispatch(logIn(postData));
+    this.props.dispatch(googlelogInApi(postData));
   }
 
   responseGoogleError = (response) => {
     console.log('Login failed');
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(nextProps.isLoggedIn){
+      nextProps.history.push('/employee/dashboard');
+      return null;
+    }
   }
 
   render() {
@@ -70,4 +77,10 @@ Login.propTypes = {
   dispatch : propTypes.func
 }
 
-export default connect()(Login);
+const mapStateToProps = state => {
+    return {
+      isLoggedIn : state.loginUser.isLoggedIn
+    }
+};
+
+export default connect(mapStateToProps)(Login);

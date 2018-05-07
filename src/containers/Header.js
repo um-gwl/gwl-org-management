@@ -1,35 +1,78 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 import {Nav,Navbar,NavItem} from 'react-bootstrap';
 import { LinkContainer } from "react-router-bootstrap";
+import {logout} from '../actions/Login.action';
 
 class Header extends Component {
+  constructor(props){
+    super(props);
+    this.logout = this.logout.bind(this);
+  }
+  logout(){
+    const token = localStorage.getItem('goodwork-accessToken-remember');
+    this.props.dispatch(logout(token));
+  }
   render(){
-    return (
-      <div>
-        <Navbar>
-          <Navbar.Header>
-            <Navbar.Brand>
-              <Link to="/">GoodWorkLabs</Link>
-            </Navbar.Brand>
-          </Navbar.Header>
-          <Nav className='navbar-right'>
-            <LinkContainer to="/login">
-              <NavItem>
-                Login
+    console.log(this.props.isLoggedIn);
+    if(this.props.isLoggedIn){
+      return (
+        <div>
+          <Navbar>
+            <Navbar.Header>
+              <Navbar.Brand>
+                <Link to="/">GoodWorkLabs</Link>
+              </Navbar.Brand>
+            </Navbar.Header>
+            <Nav className='navbar-right'>
+              <NavItem onClick={this.logout}>
+                Logout
               </NavItem>
-            </LinkContainer>
-            <LinkContainer to="/about">
-              <NavItem>
-                about
-              </NavItem>
-            </LinkContainer>
-          </Nav>
-        </Navbar>
-      </div>
-    );
+            </Nav>
+          </Navbar>
+        </div>
+      );
+    }
+    else{
+      return (
+        <div>
+          <Navbar>
+            <Navbar.Header>
+              <Navbar.Brand>
+                <Link to="/">GoodWorkLabs</Link>
+              </Navbar.Brand>
+            </Navbar.Header>
+            <Nav className='navbar-right'>
+              <LinkContainer to="/login">
+                <NavItem>
+                  Login
+                </NavItem>
+              </LinkContainer>
+              <LinkContainer to="/about">
+                <NavItem>
+                  about
+                </NavItem>
+              </LinkContainer>
+            </Nav>
+          </Navbar>
+        </div>
+      );
+    }
   }
 }
 
-export default Header;
+Header.propTypes = {
+  dispatch : PropTypes.func
+};
+
+
+const mapStateToProps = state => {
+    return {
+      isLoggedIn : state.loginUser.isLoggedIn
+    }
+};
+
+export default connect(mapStateToProps)(Header);

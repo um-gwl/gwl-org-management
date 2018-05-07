@@ -62,7 +62,7 @@
       "command": "node server.js",
       "env": {
         "NODE_ENV": "local",
-        "API_HOST": "localhost/gwl_orgM",
+        "API_HOST": "localhost:5000",
         "MODE": "development",
         "MODULE_NAME": "Default local Server",
         "FRONTEND": "http://localhost"
