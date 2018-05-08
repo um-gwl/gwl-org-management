@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { withRouter,Route, Switch, Link, Redirect } from 'react-router-dom';
 
 import {Nav,Navbar,NavItem} from 'react-bootstrap';
 import { LinkContainer } from "react-router-bootstrap";
@@ -17,7 +17,6 @@ class Header extends Component {
     this.props.dispatch(logout(token));
   }
   render(){
-    console.log(this.props.isLoggedIn);
     if(this.props.isLoggedIn){
       return (
         <div>
@@ -71,8 +70,8 @@ Header.propTypes = {
 
 const mapStateToProps = state => {
     return {
-      isLoggedIn : state.loginUser.isLoggedIn
+      isLoggedIn : state.loginUser.get('isLoggedIn'),
     }
 };
 
-export default connect(mapStateToProps)(Header);
+export default withRouter(connect(mapStateToProps)(Header));

@@ -20,13 +20,6 @@ class Login extends Component {
     console.log('Login failed');
   }
 
-  componentWillReceiveProps(nextProps){
-    if(nextProps.isLoggedIn){
-      nextProps.history.push('/employee/dashboard');
-      return null;
-    }
-  }
-
   render() {
     return (
       <div className='container'>
@@ -77,10 +70,4 @@ Login.propTypes = {
   dispatch : propTypes.func
 }
 
-const mapStateToProps = state => {
-    return {
-      isLoggedIn : state.loginUser.isLoggedIn
-    }
-};
-
-export default connect(mapStateToProps)(Login);
+export default connect()(Login);

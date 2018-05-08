@@ -6,42 +6,56 @@ import style from '../../app.css';
 import NotFound from '../../components/NotFound';
 import Header from '../../containers/Header';
 import Footer from '../../containers/Footer';
-import {checkAuth} from '../../actions/Login.action';
+import LeftPanel from '../../containers/LeftPanel';
+import EmployeeProfile from '../profile/Profile';
 
+import {getUserDetails} from '../../actions/Dashboard.action';
+import {logout} from '../../actions/Login.action';
 
 class DashboardBody extends Component{
   render(){
     return (
-      <p className={style.AppIntro}>
+      <h1 className="text-center">
         Dashboard
-      </p>
+      </h1>
     );
   }
 }
 
 class Dashboard extends Component {
-  componentWillMount(){
-    const token = localStorage.getItem('goodwork-accessToken-remember');
-    this.props.dispatch(checkAuth(token));
+  constructor(props){
+    super(props);
+    this.logout = this.logout.bind(this);
   }
 
-  componentDidMount(){
-    console.log(this.props.isLoggedIn);
-    if(!this.props.isLoggedIn){
-      localStorage.setItem('goodwork-accessToken-remember', '');
-      this.props.history.push('/login');
-      return null;
-    }
+  componentWillMount(){
+    const token = localStorage.getItem('goodwork-accessToken-remember');
+    this.props.dispatch(getUserDetails(token));
+  }
+
+  logout(){
+    const token = localStorage.getItem('goodwork-accessToken-remember');
+    this.props.dispatch(logout(token));
   }
 
   render() {
     return (
-      <div className={style.App}>
+      <div>
         <Header/>
-        <Switch>
-          <Route path ="/employee/dashboard" component={DashboardBody}/>
-          <Redirect from="/*" to="/employee/dashboard" />
-        </Switch>
+        <div className="container">
+          <div className="row">
+            <div className="col-md-3">
+              <LeftPanel/>
+            </div>
+            <div className="col-md-9">
+              <Switch>
+                <Route path ="/employee/dashboard" component={DashboardBody}/>
+                <Route path ="/employee/profile" component={EmployeeProfile}/>
+                <Redirect from="/*" to="/employee/dashboard" />
+              </Switch>
+            </div>
+          </div>
+        </div>
         <Footer/>
       </div>
     );
@@ -54,7 +68,8 @@ Dashboard.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    isLoggedIn : state.loginUser.isLoggedIn
+    isLoggedIn : state.loginUser.get('isLoggedIn'),
+
   }
 }
 

@@ -1,23 +1,21 @@
-import { ACTION_STORE_USER_PROFILE_INFO,ACTION_LOGIN_REQUEST_FAILED,ACTION_CHECK_AUTH_STORE } from './LoginPageConstants';
-
-const initialState = {
+import { fromJS } from 'immutable';
+import { createReducerFromObject } from '../../utils/reducerUtils';
+import { ACTION_STORE_USER_PROFILE_INFO,ACTION_LOGIN_CLEAR } from './LoginPageConstants';
+const initialState = fromJS({
     isLoggedIn : false,
-    userInfo : {}
+    userInfo : null
+});
+
+const reducerFunctions = {
+  [ACTION_STORE_USER_PROFILE_INFO]: (state, payload) => state.merge({
+    userInfo: fromJS(payload.data),
+    isLoggedIn: true,
+  }),
+  [ACTION_LOGIN_CLEAR]: (state, payload) => state.merge({
+    userInfo: null,
+    isLoggedIn: false,
+  })
 };
 
-
-export default (state = initialState,action) => {
-  switch(action.type){
-    case ACTION_STORE_USER_PROFILE_INFO:
-      return {isLoggedIn:action.payload.status,userInfo:action.payload};
-    case ACTION_CHECK_AUTH_STORE:
-      return {isLoggedIn:action.payload.status,userInfo:action.payload};
-    case ACTION_LOGIN_REQUEST_FAILED:
-      return {
-          isLoggedIn : false,
-          userInfo : {}
-      };
-    default:
-    return state;
-  }
-}
+const loginReducer = createReducerFromObject(reducerFunctions, initialState);
+export default loginReducer;

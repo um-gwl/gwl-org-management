@@ -14,6 +14,12 @@ export const checkAuth = token =>
       {headers: { 'goodwork-accessToken-remember': token }})
     .then(res => res.data);
 
+export const getUserDetails = token =>
+  axios.get(
+    '/api/user/details',
+      {headers: { 'goodwork-accessToken-remember': token }})
+    .then(res => res.data);
+
 export const logout = token =>
   axios.get(
     '/api/logout',

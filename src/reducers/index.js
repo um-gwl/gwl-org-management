@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
-import { routerReducer } from 'react-router-redux';
-
+import {reducer as formReducer} from 'redux-form';
 import loginReducer from '../routes/login/Login.reducer';
 
-const rootReducers = combineReducers({
-   loginUser : loginReducer,
-   router: routerReducer
-});
+export default function createReducer(asyncReducers) {
+  const appReducer = combineReducers({
+    loginUser : loginReducer,
+    form:formReducer,
+    ...asyncReducers,
+  });
 
-export default rootReducers;
+  return (state, action) => appReducer(state, action);
+}
