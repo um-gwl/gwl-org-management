@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter,Route, Switch, Link, Redirect } from 'react-router-dom';
-import style from '../../app.css';
+import style from '../../style/main.css';
 import NotFound from '../../components/NotFound';
 import Header from '../../containers/Header';
 import Footer from '../../containers/Footer';
@@ -11,6 +11,8 @@ import EmployeeProfile from '../profile/Profile';
 
 import {getUserDetails} from '../../actions/Dashboard.action';
 import {logout} from '../../actions/Login.action';
+import {getMasterData} from '../../actions/MasterData.action';
+
 
 class DashboardBody extends Component{
   render(){
@@ -31,6 +33,7 @@ class Dashboard extends Component {
   componentWillMount(){
     const token = localStorage.getItem('goodwork-accessToken-remember');
     this.props.dispatch(getUserDetails(token));
+    this.props.dispatch(getMasterData(token));
   }
 
   logout(){
@@ -42,7 +45,7 @@ class Dashboard extends Component {
     return (
       <div>
         <Header/>
-        <div className="container">
+        <div className={'container '+ style.bottomPaddingContainer}>
           <div className="row">
             <div className="col-md-3">
               <LeftPanel/>
