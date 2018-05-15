@@ -1,10 +1,26 @@
 import { call, fork, put, takeLatest } from 'redux-saga/effects';
 import { replace } from 'react-router-redux';
 
-import * as actions from '../../actions/Login.action';
+import * as actions from './Login.action';
 import * as constants from './LoginPageConstants';
 import * as api from '../../api/api';
 
+function* manualloginUser({ payload }){
+  try {
+    const response = yield api.manualLoginUser(payload);
+    if(response.status){
+      localStorage.setItem('goodwork-accessToken-remember', response.authToken);
+      yield put({type: constants.ACTION_STORE_USER_PROFILE_INFO, payload: response});
+      yield put(replace('/employee/dashboard'));
+    }
+    else{
+      yield put({type: constants.ACTION_LOGIN_CLEAR});
+    }
+    // localStorage.setItem('coworks-accessToken-remember', response.data.token);
+  } catch (e) {
+    yield put({type: constants.ACTION_LOGIN_CLEAR});
+  }
+}
 
 function* googleloginUser({ payload }) {
   try {
@@ -44,6 +60,7 @@ function* userLogout({ payload }) {
 export default function* LoginSagas() {
   yield [
     fork(takeLatest, constants.ACTION_GOOGLE_LOGIN_REQUEST, googleloginUser),
+    fork(takeLatest, constants.ACTION_MANUAL_LOGIN_REQUEST, manualloginUser),
     fork(takeLatest, constants.ACTION_LOGOUT, userLogout),
   ];
 }

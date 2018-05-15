@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import Dashboard from './dashboard/Dashboard.js';
-import Landing from './landing/Landing.js';
+import Dashboard from './dashboard/Dashboard';
+import Landing from './landing/Landing';
 
 class App extends Component {
   render() {

@@ -2,8 +2,16 @@ import {
   ACTION_GOOGLE_LOGIN_REQUEST,
   ACTION_STORE_USER_PROFILE_INFO,
   ACTION_LOGIN_CLEAR,
-  ACTION_LOGOUT
-} from '../routes/login/LoginPageConstants';
+  ACTION_LOGOUT,
+  ACTION_MANUAL_LOGIN_REQUEST
+} from './LoginPageConstants';
+
+export function manualLogInApi(userInfo) {
+  return {
+    type: ACTION_MANUAL_LOGIN_REQUEST,
+    payload: {userInfo},
+  };
+}
 
 export function googlelogInApi(userInfo) {
   return {

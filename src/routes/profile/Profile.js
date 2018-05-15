@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {Field,reduxForm} from 'redux-form';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {sendProfileDetails} from '../../actions/Profile.action';
+import {sendProfileDetails} from './Profile.action';
+import AlertModal from '../../containers/alertModal/AlertModal';
 
 class EmployeeProfile extends Component {
   constructor(props){
@@ -75,6 +76,7 @@ class EmployeeProfile extends Component {
     const genderOption = [{id : 'MALE',name : 'MALE'} , {id : 'FEMALE',name : 'FEMALE'}];
     return (
         <div className='row'>
+          <AlertModal/>
           <div className='col-md-12'><h3>Profile Details</h3></div>
           <div className='col-md-12'>&nbsp;</div>
           <div className='col-md-3'>
@@ -143,7 +145,7 @@ const mapStateToProps = (state) => {
 
 EmployeeProfile = reduxForm({
   validate,
-  form: "postFormCreate" // a unique identifier for this form
+  form: "postFormProfile" // a unique identifier for this form
 })(EmployeeProfile);
 
 // You have to connect() to any reducers that you wish to connect to yourself

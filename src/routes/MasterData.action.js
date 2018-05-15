@@ -1,7 +1,7 @@
 import {
   ACTION_GET_MASTER_DATA,
   ACTION_GET_MASTER_DATA_STORE
-} from '../routes/dashboard/DashboardConstant';
+} from './dashboard/DashboardConstant';
 
 export function getMasterData(token) {
   return {

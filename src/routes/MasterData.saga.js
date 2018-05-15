@@ -1,7 +1,7 @@
 import { call, fork, put, takeLatest } from 'redux-saga/effects';
 import { replace } from 'react-router-redux';
 
-import * as actions from '../actions/MasterData.action';
+import * as actions from './MasterData.action';
 import * as constants from './dashboard/DashboardConstant';
 import * as constantLogin from './login/LoginPageConstants';
 import * as api from '../api/masterApi';

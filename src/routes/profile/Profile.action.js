@@ -1,6 +1,6 @@
 import {
   ACTION_SAVE_PROFILE_DETAILS
-} from '../routes/profile/Profile.constant';
+} from './Profile.constant';
 
 export const sendProfileDetails = (formData) => {
   return {

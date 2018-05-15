@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter,Route, Switch, Link, Redirect } from 'react-router-dom';
 
-import {logout} from '../actions/Login.action';
+import {logout} from '../routes/login/Login.action';
 
 class LeftPanel extends Component {
 
@@ -19,13 +19,40 @@ class LeftPanel extends Component {
       )
     }
   }
+
   constructor(props){
     super(props);
     this.logout = this.logout.bind(this);
   }
+
   logout(){
     const token = localStorage.getItem('goodwork-accessToken-remember');
     this.props.dispatch(logout(token));
+  }
+
+  renederUserActions(){
+    const {role} = this.props.userDetails;
+    if(role == 1){
+      return (
+        <ul className="list-group">
+          <li className="list-group-item">
+            <a className="defaultLink" href="#" onClick={this.logout}>Logout</a>
+          </li>
+        </ul>
+      );
+    }
+    else{
+      return (
+        <ul className="list-group">
+          <li className="list-group-item">
+            <Link className="defaultLink" to="/employee/profile">Edit Profile</Link>
+          </li>
+          <li className="list-group-item">
+            <a className="defaultLink" href="#" onClick={this.logout}>Logout</a>
+          </li>
+        </ul>
+      );
+    }
   }
   render(){
     if(this.props.userDetails === null){
@@ -58,17 +85,7 @@ class LeftPanel extends Component {
                 </div>
               </div>
             </div>
-            <ul className="list-group">
-              <li className="list-group-item">
-                <Link className="defaultLink" to="/employee/profile">Edit Profile</Link>
-              </li>
-              <li className="list-group-item">
-                <Link className="defaultLink" to="/my_activity">Timesheet</Link>
-              </li>
-              <li className="list-group-item">
-                <a className="defaultLink" href="#" onClick={this.logout}>Logout</a>
-              </li>
-            </ul>
+            {this.renederUserActions()}
           </div>
       );
     }

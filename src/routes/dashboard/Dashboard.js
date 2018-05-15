@@ -9,9 +9,9 @@ import Footer from '../../containers/Footer';
 import LeftPanel from '../../containers/LeftPanel';
 import EmployeeProfile from '../profile/Profile';
 
-import {getUserDetails} from '../../actions/Dashboard.action';
-import {logout} from '../../actions/Login.action';
-import {getMasterData} from '../../actions/MasterData.action';
+import {getUserDetails} from './Dashboard.action';
+import {logout} from '../login/Login.action';
+import {getMasterData} from '../MasterData.action';
 
 
 class DashboardBody extends Component{
