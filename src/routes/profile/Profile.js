@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Field,reduxForm} from 'redux-form';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {sendProfileDetails} from '../../actions/Profile';
+import {sendProfileDetails} from '../../actions/Profile.action';
 
 class EmployeeProfile extends Component {
   constructor(props){
@@ -64,8 +64,10 @@ class EmployeeProfile extends Component {
       formData.append('address', values.address)
       formData.append('qualification', values.qualification)
       formData.append('gender', values.gender)
-      formData.append('profile_pic_file', values.profile_pic_file[0])
-      sendProfileDetails(formData);
+      if(values.profile_pic_file != undefined){
+        formData.append('profile_pic_file', values.profile_pic_file[0])
+      }
+      this.props.dispatch(sendProfileDetails(formData));
   }
 
   render() {
@@ -119,14 +121,14 @@ class EmployeeProfile extends Component {
 function validate(values){
   const errors = {};
 
-  if(!values.user_name){
-    errors.user_name = "Please enter the name";
+  if(!values.name){
+    errors.name = "Please enter the name";
   }
   if(!values.gender){
     errors.gender = "Please select your gender";
   }
-  if(!values.designation_id){
-    errors.designation_id = "Please select your designation";
+  if(!values.qualification){
+    errors.qualification = "Please enter your qualification";
   }
   // console.log(errors);
   return errors;
@@ -140,6 +142,7 @@ const mapStateToProps = (state) => {
 }
 
 EmployeeProfile = reduxForm({
+  validate,
   form: "postFormCreate" // a unique identifier for this form
 })(EmployeeProfile);
 

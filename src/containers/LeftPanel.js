@@ -14,7 +14,9 @@ class LeftPanel extends Component {
       )
     }
     else{
-      <img src={this.props.userDetails.profile_pic} alt="prof-pic" />
+      return(
+        <img src={"http://localhost:5000/uploads/prof_pic/"+this.props.userDetails.profile_pic} alt="prof-pic" />
+      )
     }
   }
   constructor(props){

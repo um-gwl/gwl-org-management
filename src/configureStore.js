@@ -3,6 +3,7 @@ import { applyMiddleware, compose, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import loginSagas from './routes/login/LoginPage.saga';
 import userSagas from './routes/User.saga';
+import profileSagas from './routes/profile/Profile.saga';
 import MasterDatasagas from './routes/MasterData.saga';
 
 // import newCampaignSagas from '../Routes/Home/NewCampaign/NewCampaign.saga';
@@ -30,6 +31,7 @@ const configStore = (initialState,history) => {
   sagaMiddleware.run(loginSagas);
   sagaMiddleware.run(userSagas);
   sagaMiddleware.run(MasterDatasagas);
+  sagaMiddleware.run(profileSagas);
   return store;
 }
 // create the saga middleware

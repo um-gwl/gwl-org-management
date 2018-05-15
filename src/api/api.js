@@ -25,3 +25,14 @@ export const logout = token =>
     '/api/logout',
       {headers: { 'goodwork-accessToken-remember': token }})
     .then(res => res.data);
+
+export const sendProfileDetails = formData =>
+  axios.post(
+    '/api/user/profile',
+    formData,
+    {
+      headers:
+      { 'goodwork-accessToken-remember': localStorage.getItem('goodwork-accessToken-remember'),
+      'content-type': 'multipart/form-data'
+      }
+    }).then(res => res.data);
