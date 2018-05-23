@@ -69,10 +69,21 @@
         "MODULE_NAME": "Default local Server",
         "FRONTEND": "http://localhost"
       }
+    },
+    "start-prod": {
+      "description": "This script will run the prod server with default ports",
+      "command": "node server.js",
+      "env": {
+        "NODE_ENV": "AWS",
+        "API_HOST": "ec2-52-66-30-37.ap-south-1.compute.amazonaws.com:5000",
+        "MODE": "development",
+        "MODULE_NAME": "Default local Server",
+        "FRONTEND": "http://localhost"
+      }
     }
   },
   "scripts": {
-    "start": "npm i && concurrently --kill-others \"better-npm-run start-default\"",
+    "start": "npm i && concurrently --kill-others \"better-npm-run start-prod\"",
     "build": "webpack",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

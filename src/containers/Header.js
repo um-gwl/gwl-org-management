@@ -28,10 +28,15 @@ class Header extends Component {
             </Navbar.Brand>
           </Navbar.Header>
           <Nav className='navbar-right'>
-            <NavDropdown eventKey="4" title="Master Data" id="nav-dropdown">
-              <MenuItem eventKey="4.1"><Link to="/">Location</Link></MenuItem>
-              <MenuItem eventKey="4.2">Departments</MenuItem>
-              <MenuItem eventKey="4.3">Designations</MenuItem>
+            <LinkContainer to="/master-data">
+              <NavItem>
+                Master Data
+              </NavItem>
+            </LinkContainer>
+            <NavDropdown title="Employees" id="employee-dropdown">
+              <ul>
+                <li><Link to="/employee/list">Employee Details</Link></li>
+              </ul>
             </NavDropdown>
             <NavItem onClick={this.logout}>
               Logout

@@ -2,17 +2,16 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter,Route, Switch, Link, Redirect } from 'react-router-dom';
-import style from '../../style/main.css';
-import NotFound from '../../components/NotFound';
-import Header from '../../containers/Header';
-import Footer from '../../containers/Footer';
-import LeftPanel from '../../containers/LeftPanel';
-import EmployeeProfile from '../profile/Profile';
-import AdminDashboard from './admin/AdminDashboard';
+import style from '../../../style/main.css';
+import NotFound from '../../../components/NotFound';
+import Header from '../../../containers/Header';
+import Footer from '../../../containers/Footer';
+import LeftPanel from '../../../containers/LeftPanel';
+import MasterRecords from './MasterRecords';
+import EmployeeList from './EmployeeList';
 
-import {getUserDetails} from './Dashboard.action';
-import {logout} from '../login/Login.action';
-import {getMasterData} from '../MasterData.action';
+import {getUserDetails} from '../Dashboard.action';
+import {getMasterData} from '../../MasterData.action';
 
 
 class DashboardBody extends Component{
@@ -25,10 +24,9 @@ class DashboardBody extends Component{
   }
 }
 
-class Dashboard extends Component {
+class AdminDashboard extends Component {
   constructor(props){
     super(props);
-    this.logout = this.logout.bind(this);
   }
 
   componentWillMount(){
@@ -37,20 +35,11 @@ class Dashboard extends Component {
     this.props.dispatch(getMasterData(token));
   }
 
-  logout(){
-    const token = localStorage.getItem('goodwork-accessToken-remember');
-    this.props.dispatch(logout(token));
-  }
-
   render() {
     if(this.props.userDetails == null){
       return <div>Loading</div>;
     }
     else{
-      if(this.props.userDetails.role == 1){
-        return <AdminDashboard/>;
-      }
-      else{
         return (
           <div>
             <Header/>
@@ -61,9 +50,10 @@ class Dashboard extends Component {
                 </div>
                 <div className="col-md-9">
                   <Switch>
-                    <Route path ="/dashboard" component={DashboardBody}/>
-                    <Route path ="/employee/profile" component={EmployeeProfile}/>
-                    <Redirect from="/*" to="/dashboard" />
+                    <Route path ="/admin/dashboard" component={DashboardBody}/>
+                    <Route path ="/employee/list" component={EmployeeList}/>
+                    <Route path ="/master-data" component={MasterRecords}/>
+                    <Redirect from="/*" to="/admin/dashboard" />
                   </Switch>
                 </div>
               </div>
@@ -74,9 +64,8 @@ class Dashboard extends Component {
       }
     }
   }
-}
 
-Dashboard.propTypes = {
+AdminDashboard.propTypes = {
   dispatch : PropTypes.func
 };
 
@@ -87,4 +76,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default withRouter(connect(mapStateToProps)(Dashboard));
+export default withRouter(connect(mapStateToProps)(AdminDashboard));

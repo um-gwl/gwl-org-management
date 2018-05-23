@@ -11,7 +11,7 @@ function* manualloginUser({ payload }){
     if(response.status){
       localStorage.setItem('goodwork-accessToken-remember', response.authToken);
       yield put({type: constants.ACTION_STORE_USER_PROFILE_INFO, payload: response});
-      yield put(replace('/employee/dashboard'));
+      yield put(replace('/dashboard'));
     }
     else{
       yield put({type: constants.ACTION_LOGIN_CLEAR});
@@ -28,7 +28,7 @@ function* googleloginUser({ payload }) {
     if(response.status){
       localStorage.setItem('goodwork-accessToken-remember', response.authToken);
       yield put({type: constants.ACTION_STORE_USER_PROFILE_INFO, payload: response});
-      yield put(replace('/employee/dashboard'));
+      yield put(replace('/dashboard'));
     }
     else{
       yield put({type: constants.ACTION_LOGIN_CLEAR});
