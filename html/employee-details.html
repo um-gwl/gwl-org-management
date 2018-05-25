@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>GWL Management</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/application.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/fontawesome-all.min.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <!-- Header -->
+    <div>
+      <nav class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-header"><a class="navbar-brand" href="/"><img src="images/logo.png" alt=""></a></div>
+          <ul class="navbar-right nav navbar-nav">
+            <li role="presentation" class="active"><a href="/master-data">Master Data</a></li>
+            <li class="dropdown">
+              <a id="employee-dropdown" role="button" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" href="#">Employees <span class="caret"></span></a>
+              <ul role="menu" class="dropdown-menu" aria-labelledby="employee-dropdown">
+                <ul>
+                  <li><a href="/employee/list">Employee Details</a></li>
+                </ul>
+              </ul>
+            </li>
+            <li role="presentation" class=""><a role="button" href="#">Logout</a></li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+      </nav>
+    </div>
+    <!-- /Header -->
+    <div class="container">
+      <div class="row">
+        <!-- Left Side -->
+        <div class="col-sm-3">
+        Left side area
+        </div>
+        <!-- /Left Side -->
+        <!-- Right Side -->
+        <div class="col-sm-9">
+          <div class="master-data">
+            <h2>Employee List </h2>
+            
+            <table class="table table-bordered table-ui">
+              <thead>
+                <tr>
+                  <th>Name </th>
+                  <th>Designation </th>
+                  <th>Action </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Ujjal </td>
+                  <td>Soft Engineer </td>
+                  <td>
+                    <button class="btn-ui" data-toggle="modal" data-target="#details-view">View </button>
+                    <button class="btn-ui" data-toggle="modal" data-target="#access-view">Access </button>
+                    <button class="btn-ui">Deactivate </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Debabrata </td>
+                  <td>Soft Engineer </td>
+                  <td>
+                    <button class="btn-ui" data-toggle="modal" data-target="#details-view">View </button>
+                    <button class="btn-ui" data-toggle="modal" data-target="#access-view">Access </button>
+                    <button class="btn-ui">Deactivate </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- /Right Side -->
+      </div>
+    </div>
+
+    <!-- Details View Modal -->
+    <div class="modal fade custom" id="details-view" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Employee Details</h4>
+          </div>
+          <div class="modal-body">
+            <label>Name</label>
+            <input type="text">
+            <label>Designation</label>
+            <input type="text">
+            <div class="text-right">
+              <button class="btn-ui orange">Save</button>
+              <button class="btn-ui">Edit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Details View Modal -->
+
+    <!-- Access View Modal -->
+    <div class="modal fade custom" id="access-view" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Employee Access Details</h4>
+          </div>
+          <div class="modal-body">
+            <table class="table table-ui">
+              <thead>
+                <tr>
+                  <th>Module </th>
+                  <th>Permission</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>
+                    <table class="permission">
+                      <tr>
+                        <td><label>Read </label></td>
+                        <td><label>Write </label></td>
+                        <td><label>Edit </label></td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Apprisal</td>
+                  <td>
+                    <table class="permission">
+                      <tr>
+                        <td>
+                          <label>
+                            <div class="imageCheckbox">
+                              <input type="checkbox" id="read-1" name="business" value="5">
+                              <label for="read-1"></label>
+                            </div>
+                          </label>
+                        </td>
+                        <td>
+                          <label>
+                            <div class="imageCheckbox">
+                              <input type="checkbox" id="write-1" name="business" value="5">
+                              <label for="write-1"></label>
+                            </div>
+                          </label>
+                        </td>
+                        <td>
+                          <label>
+                            <div class="imageCheckbox">
+                              <input type="checkbox" id="edit-1" name="business" value="5" checked="checked">
+                              <label for="edit-1"></label>
+                            </div>
+                          </label>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>Project</td>
+                  <td>
+                    <table class="permission">
+                      <tr>
+                        <td>
+                          <label>
+                            <div class="imageCheckbox">
+                              <input type="checkbox" id="read-2" name="business" value="5" checked="checked">
+                              <label for="read-2"></label>
+                            </div>
+                          </label>
+                        </td>
+                        <td>
+                          <label>
+                            <div class="imageCheckbox">
+                              <input type="checkbox" id="write-2" name="business" value="5">
+                              <label for="write-2"></label>
+                            </div>
+                          </label>
+                        </td>
+                        <td>
+                          <label>
+                            <div class="imageCheckbox">
+                              <input type="checkbox" id="edit-2" name="business" value="5">
+                              <label for="edit-2"></label>
+                            </div>
+                          </label>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Access View Modal -->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
