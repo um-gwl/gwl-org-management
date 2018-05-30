@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="css/application.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/fontawesome-all.min.css">
+    <link rel="stylesheet" type="text/css" href="css/vistyle.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -102,11 +103,21 @@
                 <p class="name"><span>Designation </span>: SSE</p>
               </div>
             </div>
+            
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs mTop15" role="tablist">
+              <li role="presentation" class="active"><a href="#goal" aria-controls="history" role="tab" data-toggle="tab">Goal</a></li>
+              <li role="presentation"><a href="#goal2" aria-controls="time" role="tab" data-toggle="tab">Text</a></li>
+              <li role="presentation"><a href="#goal3" aria-controls="notes" role="tab" data-toggle="tab">Text 2</a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content custom">
+              <div role="tabpanel" class="tab-pane active" id="goal">Content</div>
+              <div role="tabpanel" class="tab-pane" id="goal2">Content</div>
+              <div role="tabpanel" class="tab-pane" id="goal3">Content</div>
+            </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
+          
         </div>
       </div>
     </div>
